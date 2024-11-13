@@ -1,0 +1,21 @@
+{
+  "name": "node_dictionary_app",
+  "version": "1.0.0",
+  "description": "SSW 590 Project",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "test.js",
+    "start": "app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cd721/node_dictionary_app.git"
+  },
+  "author": "An, DeMario, Espineli, Faustino, Tumbokon, Yu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cd721/node_dictionary_app/issues"
+  },
+  "homepage": "https://github.com/cd721/node_dictionary_app#readme"
+}
