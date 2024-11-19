@@ -1,9 +1,9 @@
 <article class="word">
-  <h1>{{ word.word }}</h1>
+  <h1>{{ word }}</h1>
   
   <h3>Definitions</h3>
   <ul>
-    {{#each word.definitions}}
+    {{#each definitions}}
     <li>{{@index}}. {{this}}</li>
     {{/each}}
   </ul>
