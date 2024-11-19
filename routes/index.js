@@ -24,9 +24,7 @@ const constructorMethod = (app) => {
                 `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${process.env.API_KEY}`;
 
             let { data } = await axios.get(base_url)
-
-
-            if (data == []) {
+            if (Array.isArray(data) && data.length === 0) {
                 console.log("User entered an invalid word. The Dictionary API did not provide suggestions.")
                 return res.status(404).render("words/invalid_word", {})
             } else if (Array.isArray(data) && typeof data[0] === 'string') {
@@ -35,7 +33,6 @@ const constructorMethod = (app) => {
                 return res.status(302).render("words/invalid_word", { suggestions: suggestions });
 
             }
-            console.log("here");
             let shortdef = data[0].shortdef;
 
             return res.status(200).render("words/word", { word: word, definitions: shortdef });
