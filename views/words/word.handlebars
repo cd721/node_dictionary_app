@@ -4,8 +4,7 @@
   <h3>Definitions</h3>
   <ul>
     {{#each definitions}}
-    <li>{{@index}}. {{this}}</li>
+    <li>{{inc @index "+" 1}}. {{this}}</li>
     {{/each}}
   </ul>
-  {{/if}}
 </article>

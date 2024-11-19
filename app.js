@@ -17,10 +17,17 @@ const rewriteUnsupportedBrowserMethods = (req, res, next) => {
 };
 
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(rewriteUnsupportedBrowserMethods);
 
-app.engine('handlebars', exphbs.engine({defaultLayout: 'main'}));
+app.engine('handlebars', exphbs.engine({
+  defaultLayout: 'main', helpers: {
+    inc: (value) => {
+      return parseInt(value) + 1;
+
+    }
+  }
+}));
 app.set('view engine', 'handlebars');
 
 configRoutes(app);

@@ -1,4 +1,6 @@
 import axios from 'axios'
+
+import "dotenv/config.js";
 const constructorMethod = (app) => {
     app.get("/", async (req, res) => {
         try {
@@ -19,28 +21,24 @@ const constructorMethod = (app) => {
         try {
             console.log(word)
             let base_url =
-                `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}`;
+                `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${process.env.API_KEY}`;
 
+            let { data } = await axios.get(base_url)
 
-            let { data } = await axios.get(base_url, {
-                params: {
-                    'key': `${process.env.API_KEY}`
-                }
-            })
 
             if (data == []) {
                 console.log("User entered an invalid word. The Dictionary API did not provide suggestions.")
-                return res.status(404).render("invalid_word", {})
+                return res.status(404).render("words/invalid_word", {})
             } else if (Array.isArray(data) && typeof data[0] === 'string') {
                 const suggestions = data;
                 console.log("User entered an invalid word. The Dictionary API did not provide suggestions.")
-                return res.status(302).render("invalid_word", { suggestions: suggestions });
+                return res.status(302).render("words/invalid_word", { suggestions: suggestions });
 
             }
-            console.log(data)
-            shortdef = data[0]['shortdef']
+            console.log("here");
+            let shortdef = data[0].shortdef;
 
-            return res.status(200).render("word.html", { word: word, definitions: shortdef });
+            return res.status(200).render("words/word", { word: word, definitions: shortdef });
 
 
 
