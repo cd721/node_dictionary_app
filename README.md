@@ -10,7 +10,7 @@
 These instructions assume that the development server is running.
 
 1. Navigate to localhost:3000 in the browser. The homepage will be visible.
-2. Navigate to localhost:3000/```word``` to get the definition of a word. This route will work for any word in the Merriam Webster Dictionary. If you mispell the word, the application will provide suggestsions. 
+2. Navigate to localhost:3000/```word``` to get the definition of a word. This route will work for any word in the Merriam Webster Dictionary. If you misspell the word, the application will provide suggestions. 
 
 # How to run the unit tests
 1. To be continued...
