@@ -39,4 +39,15 @@ jobs:
 
       # - name: Push Docker Image # push docker image to a registry
       #   run: docker push my-app.:${{ github.sha }} # might need a fix
- 
+    deploy:
+        name: Deploy
+        runs-on: ubuntu-latest
+        environment: production
+        steps:
+            
+        - name: Build and push
+            uses: docker/build-push-action@v2
+            with:
+            context: .
+            push: true
+            tags: ${{ secrets.DOCKERHUB_USERNAME }}/hello_flask:latest
