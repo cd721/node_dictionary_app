@@ -31,18 +31,12 @@ jobs:
       # - name: Push Docker Image # push docker image to a registry
       #   run: docker push my-app.:${{ github.sha }} # might need a fix
 
-        name: Deploy
-        runs-on: ubuntu-latest
-        environment: production
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v4
 
-            - name: Build and push
-              uses: docker/build-push-action@v2
-              with:
-                context: .
-                push: true
-                tags: ${{ secrets.DOCKERHUB_USERNAME }}/node_dictionary_app:latest
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+        context: .
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/node_dictionary_app:latest
       
               
