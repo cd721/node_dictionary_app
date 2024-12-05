@@ -9,15 +9,6 @@ on:
   # allows you to manually execute this pipeline from the Actions tab.
   workflow_dispatch:
 env:
-  API_KEY: ${{ secrets.API_KEY }}
-  AWS_REGION: us-east-2               # set this to your preferred AWS region, e.g. us-west-1
-  ECR_REPOSITORY: dictionary_apps/node_dictionary_app           # set this to your Amazon ECR repository name
-  ECS_SERVICE: node_dictionary_service                  # set this to your Amazon ECS service name
-  ECS_CLUSTER: dictionary_apps                 # set this to your Amazon ECS cluster name
-#   ECS_TASK_DEFINITION: ./task-definition.json # set this to the path to your Amazon ECS task definition
-                                               # file, e.g. .aws/task-definition.json
-  CONTAINER_NAME: node_dictionary_app           # set this to the name of the container in the
-                                               # containerDefinitions section of your task definition
 # A workflow run consists of one or more jobs that can be executed either sequentially or concurrently.
 jobs:
   # This workflow contains a single job called "build"
@@ -28,7 +19,7 @@ jobs:
     #
     steps:
       - uses: actions/checkout@v2 # checkout the code 
-      - uses: actions/setup-node@v4 # sets up python@v2
+      - uses: actions/setup-node@v4 # sets up setup-node@v2
       - run: npm i  # install required packages
 
       - name: Log in to Docker Hub # docker login
@@ -39,7 +30,7 @@ jobs:
 
       # - name: Push Docker Image # push docker image to a registry
       #   run: docker push my-app.:${{ github.sha }} # might need a fix
-  deploy:
+
         name: Deploy
         runs-on: ubuntu-latest
         environment: production
