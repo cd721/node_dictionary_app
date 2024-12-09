@@ -17,6 +17,3 @@ These instructions assume that the development server is running.
 2. In your terminal, run ```docker build -t my-app .```
 3. Then run ```docker run -p 3000:3000 my-app```
 4. Navigate to the address to access the application
-
-# How to run the unit tests
-1. To be continued...
