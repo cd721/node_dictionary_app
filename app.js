@@ -1,38 +1,28 @@
 import express from 'express';
 const app = express();
-import configRoutes from './routes/index.js';
 import exphbs from 'express-handlebars';
+import routes from './routes/index.js'; // Import your route definitions
 
-const rewriteUnsupportedBrowserMethods = (req, res, next) => {
-  // If the user posts to the server with a property called _method, rewrite the request's method
-  // To be that method; so if they post _method=PUT you can now allow browsers to POST to a route that gets
-  // rewritten in this middleware to a PUT route
-  if (req.body && req.body._method) {
-    req.method = req.body._method;
-    delete req.body._method;
-  }
-
-  // let the next middleware run:
-  next();
-};
-
+// Middleware for parsing JSON and URL-encoded data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(rewriteUnsupportedBrowserMethods);
 
+// Handlebars setup
 app.engine('handlebars', exphbs.engine({
-  defaultLayout: 'main', helpers: {
-    inc: (value) => {
-      return parseInt(value) + 1;
-
-    }
+  defaultLayout: 'main',
+  helpers: {
+    inc: (value) => parseInt(value) + 1
   }
 }));
 app.set('view engine', 'handlebars');
 
-configRoutes(app);
+// Use the routes defined in routes/index.js
+routes(app);
 
+// Start the server
 app.listen(3000, () => {
   console.log("We've now got a server!");
   console.log('Your routes will be running on http://localhost:3000');
 });
+
+export default app;
